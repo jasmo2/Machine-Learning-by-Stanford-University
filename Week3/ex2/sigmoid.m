@@ -9,7 +9,7 @@ function g = sigmoid(z)
 % Instructions: Compute the sigmoid of each value of z (z can be a matrix,
 %               vector or scalar).
     exponent = (-1 * z)
-    sigmoid = 1 / ( 1 + e^exponent )
+    g = 1 ./ ( 1 + e.^(exponent) )
 
 
 % =============================================================
