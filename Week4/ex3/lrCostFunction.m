@@ -6,11 +6,11 @@ function [J, grad] = lrCostFunction(theta, X, y, lambda)
 %   gradient of the cost w.r.t. to the parameters. 
 
 % Initialize some useful values
-m = length(y); % number of training examples
+  m = length(y); % number of training examples
 
 % You need to return the following variables correctly 
-J = 0;
-grad = zeros(size(theta));
+  J = 0;
+  grad = zeros(size(theta));
 
 % ====================== YOUR CODE HERE ======================
 % Instructions: Compute the cost of a particular choice of theta.
@@ -35,8 +35,17 @@ grad = zeros(size(theta));
 %           temp(1) = 0;   % because we don't add anything for j = 0  
 %           grad = grad + YOUR_CODE_HERE (using the temp variable)
 %
+  z = X * theta
+  h = sigmoid(z)
 
+  el1 =  ((-y)' * log(h))
+  el2 = (1 - y)' * log(1 - h)
 
+  % sum() is neede; due to, we should replicate the sumatory over the vectors
+  J = (sum(el1 - el2) / m) 
+
+  tempTheta = theta;
+  tempTheta(1) = 0;
 
 
 
@@ -47,6 +56,6 @@ grad = zeros(size(theta));
 
 % =============================================================
 
-grad = grad(:);
+  grad = grad(:);
 
 end
