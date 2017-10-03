@@ -42,13 +42,12 @@ function [J, grad] = lrCostFunction(theta, X, y, lambda)
   el2 = (1 - y)' * log(1 - h)
 
   % sum() is neede; due to, we should replicate the sumatory over the vectors
-  J = (sum(el1 - el2) / m) 
-
   tempTheta = theta;
   tempTheta(1) = 0;
+  
+  J = (sum(el1 - el2) / m)  + ( (lambda * sum(tempTheta .^  2)) / (2*  m))
 
-
-
+  grad = ((X' * (h - y)) + lambda .* tempTheta) / m
 
 
 
