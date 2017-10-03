@@ -8,14 +8,13 @@ function [all_theta] = oneVsAll(X, y, num_labels, lambda)
 %   to the classifier for label i
 
 % Some useful variables
-m = size(X, 1);
-n = size(X, 2);
+  m = size(X, 1);
+  n = size(X, 2);
 
 % You need to return the following variables correctly 
-all_theta = zeros(num_labels, n + 1);
-
+  all_theta = zeros(num_labels, n + 1);
 % Add ones to the X data matrix
-X = [ones(m, 1) X];
+  X = [ones(m, 1) X];
 
 % ====================== YOUR CODE HERE ======================
 % Instructions: You should complete the following code to train num_labels
@@ -48,15 +47,24 @@ X = [ones(m, 1) X];
 %         fmincg (@(t)(lrCostFunction(t, X, (y == c), lambda)), ...
 %                 initial_theta, options);
 %
+  
+%     
+  options = optimset('GradObj', 'on', 'MaxIter', 50);
+% 
+%     % Run fmincg to obtain the optimal theta
+%     % This function will return theta and the cost 
+  for c = 1:num_labels
+    initial_theta = zeros(n + 1, 1);
+    [theta] = fmincg (@(t)(lrCostFunction(t, X, (y == c), lambda)), initial_theta, options);
+    % fprintf('theta size: ');
+    % fprintf(' %d %d \n', size(theta));
+    all_theta(c,:) = theta
 
+  end
 
-
-
-
-
-
-
-
+  % fprintf('all_theta size: ');
+  % fprintf('%d %d \n', size(all_theta));
+  all_theta
 
 
 
