@@ -54,7 +54,8 @@ function [J grad] = nnCostFunction(nn_params, ...
   end
   el1 = (-yCost ) .* log(h);
   el2 = (1-yCost) .* log(1-h);
-  J = sum(sum(el1 - el2)) / m;
+  regularization = (lambda / (2 * m)) * (sum(sum(Theta1 .^ 2)) + sum(sum(Theta2 .^ 2)))
+  J = (sum(sum(el1 - el2)) / m) + regularization;
 
   
   % Part 2: Implement the backpropagation algorithm to compute the gradients
