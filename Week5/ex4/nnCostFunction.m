@@ -93,7 +93,8 @@ function [J grad] = nnCostFunction(nn_params, ...
     Theta2_grad = Theta2_grad + d3 * a2'  ;
   end
 
-
+  Theta1_grad = (1/m) * Theta1_grad;
+  Theta2_grad = (1/m) * Theta2_grad;
   % Part 3: Implement regularization with the cost function and gradients.
   %
   %         Hint: You can implement this around the code for
