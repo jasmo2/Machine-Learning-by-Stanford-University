@@ -75,7 +75,23 @@ function [J grad] = nnCostFunction(nn_params, ...
   %               first time.
   %
 
-  
+  for i = 1:m
+    a1 = [ones(1,1); X(1,:)'];; % column vector
+    z2 = Theta1 * a1;
+
+    a2 = [ones(1,1); sigmoid(z2)];
+
+    z3 = Theta2 * a2;
+    a3 = sigmoid(z3);
+
+    yy = (y(i) == [1:num_labels])';
+    d3 = a3 - yy;
+    d2 = Theta2' * d3 .* sigmoid(a2)';
+    d2 = d2(2:end);
+
+    Theta1_grad = Theta1_grad + d2 * a1'  ;
+    Theta2_grad = Theta2_grad + d3 * a2'  ;
+  end
 
 
   % Part 3: Implement regularization with the cost function and gradients.
