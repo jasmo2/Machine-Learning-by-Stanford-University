@@ -86,7 +86,7 @@ function [J grad] = nnCostFunction(nn_params, ...
 
     yy = (y(i) == [1:num_labels])';
     d3 = a3 - yy;
-    d2 = Theta2' * d3 .* sigmoid(a2)';
+    d2 = (Theta2' * d3) .* [1; sigmoidGradient(z2)];
     d2 = d2(2:end);
 
     Theta1_grad = Theta1_grad + d2 * a1'  ;
