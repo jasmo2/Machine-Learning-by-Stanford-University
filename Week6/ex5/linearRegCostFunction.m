@@ -19,9 +19,14 @@ function [J, grad] = linearRegCostFunction(X, y, theta, lambda)
   %               You should set J to the cost and grad to the gradient.
   %
   h = X * theta
-  J = (1/ (2*m)) * sum((h - y).^2) + (lambda / (2*m)) * (sum(theta(2:end) .^ 2))
+  sumatory = (h - y)
+  J = (1/ (2*m)) * sum(sumatory.^2) + (lambda / (2*m)) * (sum(theta(2:end) .^ 2))
 
-
+  % thetaTemp = theta
+  % thetaTemp(1) = 0
+  G2 = (theta .* lambda);
+  G2(1) = 0;
+  grad = ((X' * sumatory) + G2) / m;
 
 
   % =========================================================================
